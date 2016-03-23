@@ -1,0 +1,3 @@
+Skybox Quelle: http://www.zfight.com/misc/images/textures/envmaps/miramar_large.jpg
+
+Skybox City Bottom Quelle: http://www2.geo-airbusds.com/files/pgallery/public/r500_15_satellite_image_spot5_2.5m_berlin_germany_2006_thumbnail-500-500-c.jpg

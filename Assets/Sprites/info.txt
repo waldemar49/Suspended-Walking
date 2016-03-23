@@ -1,0 +1,8 @@
+Quellen: 
+10: https://africacheck.org/wp-content/uploads/2013/05/Satellite-image-courtesy-of-GeoEye.jpg
+11: http://inferno999.com/images/Inauguration_2009.jpg
+12: http://storms.ngs.noaa.gov/storms/joplin/may24C365000e4105000n.jpg
+13: http://eu-uhi.eu/download/confidential/wp6/ortofoto_area_poc_mow.jpg
+glass1: http://img14.deviantart.net/4edb/i/2011/157/e/c/glass_texture_by_yko_54-d3i97t8.jpg
+glass2: http://textureplanet.net/wp-content/uploads/2012/11/Wrinkled_glass_Texture_-_4928_x_3264.jpg
+cloud: http://images.google.de/imgres?imgurl=http%3A%2F%2Fbgfons.com%2Fupload%2Fsky_texture1969.jpg&imgrefurl=http%3A%2F%2Fbgfons.com%2Fdownload%2F1969&h=1944&w=2592&tbnid=SufRWv8P31u66M%3A&docid=XAnOCxwWXljRTM&ei=MA9vVp73DoyksAGFk5yIAg&tbm=isch&iact=rc&uact=3&dur=264&page=5&start=117&ndsp=33&ved=0ahUKEwiez4eMgtzJAhUMEiwKHYUJByE4ZBCtAwiXATAx
