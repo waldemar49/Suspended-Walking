@@ -160,7 +160,7 @@ public class PlayerMain : MonoBehaviour {
             fScript.gameObject.SetActive (false);
 
 			if (!following) {
-				compass.SetActive (true);
+				compass.SetActive (false);
 			}
 
 			curSpeed = swingingSpeedFlw;

@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour {
 		Vector3 newPos;
 
 		// Sets the cameras position
-		if (player.GetComponent<PlayerMain> ().thirdPerson == true) {
+		if (player.GetComponent<PlayerMain>().thirdPerson == true) {
 			// Camera always behind player
 			newPos = target.position - target.forward * offset;
 

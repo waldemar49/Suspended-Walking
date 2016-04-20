@@ -52,26 +52,23 @@ public class GameControllerScript : MonoBehaviour {
 			// Walking
 			if (Input.GetKeyDown(KeyCode.Alpha1)) {
 				gameMode = 1;
-				/*if (!following) {
-					//groundPlane.SetActive(true);
-					playerScript.wScript.gameObject.GetComponent<Rigidbody>().useGravity = true;
-				}*/
-				Debug.Log("Game mode: Walking");
+                playerScript.SetGameMode(gameMode);
+                Debug.Log("Game mode: Walking");
 			}
 			// Swinging
 			if (Input.GetKeyDown(KeyCode.Alpha2)) {
 				gameMode = 2;
-				//groundPlane.SetActive (false);
-				Debug.Log("Game mode: Swinging");
+                //groundPlane.SetActive (false);
+                playerScript.SetGameMode(gameMode);
+                Debug.Log("Game mode: Swinging");
 			}
 			// Flying
 			if (Input.GetKeyDown(KeyCode.Alpha3)) {
 				gameMode = 3;
-				//groundPlane.SetActive (false);
-				Debug.Log("Game mode: Flying");
+                //groundPlane.SetActive (false);
+                playerScript.SetGameMode(gameMode);
+                Debug.Log("Game mode: Flying");
 			}
-
-			playerScript.SetGameMode(gameMode);
 
 			// Follow way points
 			if (Input.GetKeyDown (KeyCode.Alpha4)) {
@@ -108,12 +105,6 @@ public class GameControllerScript : MonoBehaviour {
                 }
                 Debug.Log("Collect");
             }
-            // Show glass floor, when walking and not following waypoints
-            /*if (gameMode == 1 && !following) {
-                groundPlane.SetActive(true);
-            } else {
-                groundPlane.SetActive(false);
-            }*/
 
         } else {
 			if(collectibles) {

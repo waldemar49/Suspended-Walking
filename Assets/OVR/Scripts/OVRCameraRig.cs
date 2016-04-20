@@ -198,7 +198,7 @@ public class OVRCameraRig : MonoBehaviour
 				if (cam && (cam.transform == leftEyeAnchor || cam.transform == rightEyeAnchor) && cam.enabled)
 				{
 					Debug.LogWarning("Having a Camera on " + cam.name + " is deprecated. Disabling the Camera. Please use the Camera on " + centerEyeCamera.name + " instead.");
-					cam.enabled = false;
+					// cam.enabled = false; <---------!!!!!!!!!!!
 
 					// Use "MainCamera" if the previous cameras used it.
 					if (cam.CompareTag("MainCamera"))
