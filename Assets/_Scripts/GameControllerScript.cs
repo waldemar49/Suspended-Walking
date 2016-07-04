@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class GameControllerScript : MonoBehaviour {
@@ -7,6 +8,8 @@ public class GameControllerScript : MonoBehaviour {
 	public GameObject token;
 	public GameObject obstacle;
 	public GameObject player;
+    public GameObject noseLeft;
+    public GameObject noseRight;
 	//public GameObject groundPlane;
 	public Timer timer;
 	public Text scoreText;
@@ -26,6 +29,8 @@ public class GameControllerScript : MonoBehaviour {
 	// Use collectibles?
 	private bool collectibles = true;
 	private bool following = false;
+    private List<GameObject> collectiblesList = new List<GameObject>();
+    private bool collectiblesActive;
 	
 	void Start () {
 		score = 0;
@@ -36,6 +41,9 @@ public class GameControllerScript : MonoBehaviour {
 
 		// Set third person view to true
 		playerScript.SetView (true);
+
+        SpawnObjects();
+        DisableObjects();
 	}
 
 	void Update() {
@@ -43,6 +51,11 @@ public class GameControllerScript : MonoBehaviour {
 			finalScoreText.text = "Your final score: " + score;
 			Reset ();
 		}
+
+        if (Input.GetKeyDown(KeyCode.Alpha9)) {
+            noseLeft.SetActive(!noseLeft.activeInHierarchy);
+            noseRight.SetActive(!noseRight.activeInHierarchy);
+        }
 
 		if (!started) {
 			// End game
@@ -88,9 +101,9 @@ public class GameControllerScript : MonoBehaviour {
                 timer.IsVisible(false);
                 scoreText.enabled = false;
                 playerScript.SetFollowing(false);
-                if (gameMode != 1) {
+                /*if (gameMode == 3) {
                     playerScript.compass.SetActive(true);
-                }
+                }*/
                 Debug.Log("Free movement");
             }
             // Collect mode
@@ -100,15 +113,18 @@ public class GameControllerScript : MonoBehaviour {
                 timer.IsVisible(true);
                 scoreText.enabled = true;
                 playerScript.SetFollowing(false);
-                if (gameMode != 1) {
+                /*if (gameMode == 3) {
                     playerScript.compass.SetActive(true);
-                }
+                }*/
                 Debug.Log("Collect");
             }
 
         } else {
 			if(collectibles) {
-				SpawnObjects();
+                //SpawnObjects();
+                if (!collectiblesActive) {
+                    ActivateObjects();
+                }
 				timer.countDown = true;
 			}
 		}
@@ -136,10 +152,10 @@ public class GameControllerScript : MonoBehaviour {
 			Vector3 spawnPosition;
 
 			// Change positions if player is walking
-			if (gameMode != 1){
+			//if (gameMode != 1){
 				spawnPosition = new Vector3 ((Random.value * (2*maxPos)) - maxPos, 
 			                                     	(Random.value * (2*maxPos)) - maxPos, (Random.value * (2*maxPos)) - maxPos);
-			} else {
+			/*} else {
 				int yPos = Random.Range (0, 3);
 
 				if(yPos == 1){
@@ -147,17 +163,19 @@ public class GameControllerScript : MonoBehaviour {
 				}
 
 				spawnPosition = new Vector3 ((Random.value * (2*maxPos)) - maxPos, yPos, (Random.value * (2*maxPos)) - maxPos);
-			}
+			}*/
 
 			GameObject child;
 
 			// Use tokens and obstacles
 			if(amountTokens < maxCollectibles * 0.7){
 				child = Instantiate (token, spawnPosition, Quaternion.identity) as GameObject;
+                collectiblesList.Add(child);
 				amountTokens++;
 			} else {
 				child = Instantiate (obstacle, spawnPosition, Quaternion.identity) as GameObject;
-			}
+                collectiblesList.Add(child);
+            }
 
 			child.transform.parent = this.transform; 
 			
@@ -165,21 +183,30 @@ public class GameControllerScript : MonoBehaviour {
 		}
 	}
 
-	// Delete tokens and obstacles
-	void DeleteObjects(){
-		GameObject[] tokens = GameObject.FindGameObjectsWithTag ("Token");
-		GameObject[] obstacles = GameObject.FindGameObjectsWithTag ("Obstacle");
+	// Disable tokens and obstacles
+	void DisableObjects(){
 
-		for (int i = 0; i < tokens.Length; i++) {
-			Destroy (tokens[i]);
-		}
+        for (int i = 0; i < collectiblesList.Count; i++) {
+            collectiblesList[i].gameObject.SetActive(false);
+        }
+        collectiblesActive = false;
+    }
 
-		for (int j = 0; j < obstacles.Length; j++) {
-			Destroy(obstacles[j]);
-		}
-		amountCollectibles = 0;
-		amountTokens = 0;
-	}
+    // Enable tokens and obstacles
+    void ActivateObjects() {
+        for (int i = 0; i < collectiblesList.Count; i++) {
+            collectiblesList[i].gameObject.SetActive(true);
+        }
+
+        collectiblesActive = true;
+    }
+
+    // Change position of collectible and activate it
+    public void ReplaceObject(GameObject collectible) {
+        collectible.transform.position =  new Vector3((Random.value * (2 * maxPos)) - maxPos,
+                                                     (Random.value * (2 * maxPos)) - maxPos, (Random.value * (2 * maxPos)) - maxPos);
+        collectible.SetActive(true);
+    }
 
 	void ResetScore(){
 		score = 0;
@@ -195,7 +222,7 @@ public class GameControllerScript : MonoBehaviour {
 		playerScript.Reset ();
 		ResetScore ();
 		started = false;
-		DeleteObjects();
+		DisableObjects();
 		timer.Reset ();
 		timer.countDown = false;
 	}

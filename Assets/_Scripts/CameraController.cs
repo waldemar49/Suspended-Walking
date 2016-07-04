@@ -20,10 +20,10 @@ public class CameraController : MonoBehaviour {
 			// Camera slightly above player
 			transform.Translate (0, 1, 0);
 		} else {
-			//Camera in front of players face
-			newPos = target.position + player.GetComponent<PlayerMain> ().fPersView + target.forward;
+            //Camera in front of players face
+            newPos = target.position + transform.TransformDirection(player.GetComponent<PlayerMain>().fPersView);
 
-			transform.position = newPos;
+            transform.position = newPos;
 			transform.rotation = target.rotation;
 		}
 	}

@@ -5,7 +5,7 @@ public class Compass : MonoBehaviour {
 
 	public UnityEngine.UI.RawImage artHorizon;
 
-	// Max flying height of the player object
+    /*// Max flying height of the player object
 	private float maxHeight;
 	// Max room for the artHorizon to navigate
 	private static float MAX_HEIGHT_COMP;
@@ -25,5 +25,9 @@ public class Compass : MonoBehaviour {
 
 	public void setMaxHeight(float height){
 		maxHeight = height;
-	}
+	}*/
+
+    public void UpdateCompass(float playerRot) {
+        transform.rotation = Quaternion.Euler(0, 0, playerRot);
+    }
 }

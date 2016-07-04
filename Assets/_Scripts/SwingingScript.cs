@@ -11,12 +11,14 @@ public class SwingingScript : MonoBehaviour, Rotation.Listener {
 	public float rotationSpeed;
 	public float startSpeed;
     public float rotDamping;
-	// Position of camera for first person mode
-	public Vector3 fPerView;
+    // Position of camera for first person mode
+    public Vector3 fPerView;
+
+    void Awake() {
+        fPerView = new Vector3(0, 1f, 0.5f);
+    }
 
 	void Start () {
-		fPerView = new Vector3 (0, 0.5f, 0);
-
         RotationController.CalibratedRotation().Add(this);
     }
 
@@ -32,8 +34,12 @@ public class SwingingScript : MonoBehaviour, Rotation.Listener {
     }
 
     public void Move() {
-		// rotationSpeed degrees per second
-		float rotateX = Input.GetAxis("Vertical") * rotationSpeed * Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.KeypadPlus)) rotationSpeed += 5;
+        if (Input.GetKeyDown(KeyCode.KeypadMinus)) rotationSpeed -= 5;
+
+        // rotationSpeed degrees per second
+        float rotateX = Input.GetAxis("Vertical") * rotationSpeed * Time.deltaTime;
 		float rotateY = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
         // Edit -> Project Settings -> Input
         float rotateZ = Input.GetAxis("Roll") * rotationSpeed * Time.deltaTime;

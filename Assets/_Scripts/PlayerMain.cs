@@ -33,8 +33,8 @@ public class PlayerMain : MonoBehaviour {
 
 	void Start() {
 		compScript = compass.GetComponent<Compass> ();
-		compScript.setMaxHeight (maxPos);
-		fPersView = wScript.fPerView;
+		//compScript.setMaxHeight (maxPos);
+		fPersView = sScript.fPerView;
         flwWayPnts = GetComponent<FollowWayPoints> ();
 	}
 
@@ -98,7 +98,7 @@ public class PlayerMain : MonoBehaviour {
             }
         }
 
-		compScript.UpdateCompass (transform.position.y, transform.rotation.eulerAngles.z);
+		compScript.UpdateCompass (transform.rotation.eulerAngles.y);
 	}
 
 	void ResetLookDir () {
@@ -160,11 +160,13 @@ public class PlayerMain : MonoBehaviour {
             fScript.gameObject.SetActive (false);
 
 			if (!following) {
-				compass.SetActive (false);
+				compass.SetActive (true);
 			}
 
 			curSpeed = swingingSpeedFlw;
-			fPersView = sScript.fPerView;
+            fPersView = sScript.fPerView;
+            Debug.Log(sScript.fPerView);
+            Debug.Log(fPersView);
             flwWayPnts.curSpeed = curSpeed;
         // Flying
         } else if (mode == 3) {

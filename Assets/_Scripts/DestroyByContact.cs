@@ -4,6 +4,8 @@ using System.Collections;
 public class DestroyByContact : MonoBehaviour {
 
 	public int scoreValue;
+    public AudioClip tokenSound;
+    public AudioClip obstacleSound;
 
 	private GameControllerScript gameController;
 
@@ -18,14 +20,17 @@ public class DestroyByContact : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Token") {
+            AudioSource.PlayClipAtPoint(tokenSound, transform.position);
 			gameController.AddScore (scoreValue);
 			gameController.amountTokens--;
 		}
 		if (other.tag == "Obstacle") {
-			gameController.AddScore (-scoreValue);
+            AudioSource.PlayClipAtPoint(obstacleSound, transform.position);
+            gameController.AddScore (-scoreValue);
 		}
 
 		gameController.amountCollectibles--;
-		Destroy (other.gameObject);
+        other.gameObject.SetActive(false);
+        gameController.ReplaceObject(other.gameObject);
 	}
 }
