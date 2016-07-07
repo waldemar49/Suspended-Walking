@@ -15,7 +15,7 @@ public class SwingingScript : MonoBehaviour, Rotation.Listener {
     public Vector3 fPerView;
 
     void Awake() {
-        fPerView = new Vector3(0, 1f, 0.5f);
+        fPerView = new Vector3(0, 1, 0.5f);
     }
 
 	void Start () {
@@ -25,7 +25,7 @@ public class SwingingScript : MonoBehaviour, Rotation.Listener {
     public void On(Quaternion q) {
         if (isActiveAndEnabled) {
             Quaternion target = new Quaternion(-0, q.x, -0, q.w);
-            transform.parent.rotation = Quaternion.Lerp(transform.parent.rotation, transform.parent.rotation * target, Time.deltaTime * rotDamping);
+            transform.parent.rotation = Quaternion.Lerp(transform.parent.rotation, transform.parent.rotation * target, Time.deltaTime * rotDamping * rotDamping);
 
             // x rotation is absolute, y rotation is relative, no rotation around z 
             Vector3 s = Quaternion.ToEulerAngles(new Quaternion(-q.y, 0, 0, q.w));

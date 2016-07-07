@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Compass : MonoBehaviour {
 
-	public UnityEngine.UI.RawImage artHorizon;
+	//public UnityEngine.UI.RawImage artHorizon;
 
     /*// Max flying height of the player object
 	private float maxHeight;
@@ -28,6 +28,7 @@ public class Compass : MonoBehaviour {
 	}*/
 
     public void UpdateCompass(float playerRot) {
-        transform.rotation = Quaternion.Euler(0, 0, playerRot);
+        //transform.localEulerAngles = new Vector3(0, 0, playerRot);
+        transform.localRotation = Quaternion.Euler(new Vector3(0, 0, playerRot)); 
     }
 }

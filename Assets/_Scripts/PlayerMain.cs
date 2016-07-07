@@ -165,8 +165,6 @@ public class PlayerMain : MonoBehaviour {
 
 			curSpeed = swingingSpeedFlw;
             fPersView = sScript.fPerView;
-            Debug.Log(sScript.fPerView);
-            Debug.Log(fPersView);
             flwWayPnts.curSpeed = curSpeed;
         // Flying
         } else if (mode == 3) {
